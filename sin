@@ -1,0 +1,47 @@
+#define E 0.01 
+#define PI 3.1415
+
+double nfabs(double x){
+	if (x > 0)
+		return x;
+	else return -1 * x;
+}
+
+
+double sin_e(double x) {
+	double temp = x;
+	double sum = temp ;
+	int n = 0; 
+	while (nfabs(temp) > E) {
+		n++;
+		temp = temp * (-1) * (x * x) / (2 * n) / (2 * n + 1);
+		sum += temp;
+	}
+
+	return sum;
+}
+
+
+int test_sin() {
+	int r = 0;
+
+	r = r || (nfabs(sin_e(0)) - 0 >= E);
+	r = r || (nfabs(sin_e(PI/2)) - 1 >= E);
+	r = r || (nfabs(sin_e(PI)) - 0 >= E);
+	r = r || (nfabs(sin_e(3*PI/2)) - 1>= E);
+	r = r || (nfabs(sin_e(2*PI)) - 0 >= E);
+	r = r || (nfabs(sin_e(-1 * PI / 2)) - 1 >= E);
+	r = r || (nfabs(sin_e(-1 * PI)) - 0 >= E);
+	r = r || (nfabs(sin_e(-1 * 3 * PI /2)) - 1 >= E);
+	r = r || (nfabs(sin_e(- 2 * PI)) - 0 >= E);
+	r = r || (nfabs(sin_e(PI / 6)) - 0.5 >= E);
+	r = r || (nfabs(sin_e(7* PI / 6)) - 0.5 >= E);
+	//r = r || (nfabs(sin_e()) - smth >= E);
+
+
+	return r;
+}
+
+
+int main() {
+	return test_sin();
