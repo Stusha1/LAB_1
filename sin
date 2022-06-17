@@ -45,3 +45,4 @@ int test_sin() {
 
 int main() {
 	return test_sin();
+}
